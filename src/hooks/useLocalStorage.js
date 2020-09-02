@@ -1,10 +1,15 @@
-import react from 'react';
-import {useState} from 'react-dom';
+import {useState} from 'react';
 
-export const useLocalStorage = (key, initialValue) => {
+const useLocalStorage = (key, initialValue) => {
+    debugger;
     const [storedValue, setStoredValue] = useState(() => {
-        const item = window.localStorage.getItem(key);
-        return item ? JSON.parse(item) : initialValue;
+        debugger;
+        if (window.localStorage.getItem(key)){
+            return JSON.parse(window.localStorage.getItem(key));
+        }
+        else{
+            return initialValue;
+        }
         });
 
     const setValue = value => {
@@ -13,5 +18,6 @@ export const useLocalStorage = (key, initialValue) => {
     };
 
       return [storedValue, setValue];
-      
 }
+
+export default useLocalStorage;
